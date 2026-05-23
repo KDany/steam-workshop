@@ -1,0 +1,55 @@
+name: Map Technical Feedback
+description: Report map-specific technical feedback that is not a clear bug.
+labels:
+  - Feedback
+body:
+  - type: dropdown
+    id: game
+    attributes:
+      label: Game
+      options:
+        - Counter-Strike 2
+      default: 0
+    validations:
+      required: true
+
+  - type: input
+    id: map_name
+    attributes:
+      label: Workshop map name.
+      placeholder: "Example: Dust II Long"
+    validations:
+      required: true
+
+  - type: textarea
+    id: area
+    attributes:
+      label: Area or feature
+      description: Which part of the map are you referring to?
+      placeholder: "Example: Mid to B connector lighting and visibility."
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Technical feedback
+      description: "Describe the problem and why it impacts gameplay."
+      placeholder: "Example: The lighting contrast in this map location makes enemies hard to spot at longer distances, which creates unbalanced gameplay."
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested improvement
+      description: If you have a suggestion, describe the change or recommendation you would like to see.
+      placeholder: "Example: Increase visibility in this corridor with brighter lighting or cleaner contrast."
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues, including closed ones.
+          required: true

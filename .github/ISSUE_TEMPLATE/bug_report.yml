@@ -1,0 +1,67 @@
+name: Bug Report
+description: Report a reproducible bug in a KDany Steam Workshop map.
+labels:
+  - Bug
+body:
+  - type: dropdown
+    id: game
+    attributes:
+      label: Game
+      description: Which game does this issue affect?
+      options:
+        - Counter-Strike 2
+      default: 0
+    validations:
+      required: true
+
+  - type: input
+    id: map_name
+    attributes:
+      label: Map name
+      description: Workshop map name.
+      placeholder: "Example: Dust II Long"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug description
+      description: A short summary of what is broken.
+      placeholder: "Example: The minimap is missing during gameplay."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: List exact steps so the issue can be reproduced.
+      placeholder: "Example:\n1. Load the map\n2. Start a round\n3. Check the radar/minimap"
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected_vs_actual
+    attributes:
+      label: Expected vs actual behavior
+      description: Describe what you expected, then what happened instead.
+      placeholder: "Example:\nExpected: The minimap should show the map layout and update player position.\nActual: The minimap frame is visible, but the map layout is empty."
+    validations:
+      required: false
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Screenshots or video
+      description: Optional, but helpful if you have visual evidence.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues, including closed ones.
+          required: true
+        - label: I can reproduce this issue consistently.
+          required: true

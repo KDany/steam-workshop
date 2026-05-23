@@ -1,0 +1,130 @@
+name: Label issues by game
+
+on:
+  issues:
+    types:
+      - opened
+      - edited
+      - reopened
+
+permissions:
+  issues: write
+
+jobs:
+  label-by-game:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply game label
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.issue.body || "";
+            const normalizedBody = body.replace(/\r/g, "");
+
+            function parseIssueFormFields(markdown) {
+              const fields = new Map();
+              const lines = markdown.split("\n");
+              let currentField = null;
+              let buffer = [];
+
+              const flush = () => {
+                if (!currentField) return;
+                const value = buffer
+                  .map((line) => line.trim())
+                  .filter((line) => line.length > 0 && !line.startsWith("<!--") && !line.endsWith("-->"))
+                  .join("\n")
+                  .trim();
+                fields.set(currentField.toLowerCase(), value);
+              };
+
+              for (const line of lines) {
+                const heading = line.match(/^###\s+(.+?)\s*$/);
+                if (heading) {
+                  flush();
+                  currentField = heading[1];
+                  buffer = [];
+                  continue;
+                }
+
+                if (currentField) {
+                  buffer.push(line);
+                }
+              }
+
+              flush();
+              return fields;
+            }
+
+            const fields = parseIssueFormFields(normalizedBody);
+            let game = (fields.get("game") || "").split("\n")[0].trim();
+
+            if (!game) {
+              const fallbackMatch = normalizedBody.match(/\b(Counter-Strike 2)\b/i);
+              game = fallbackMatch ? fallbackMatch[1] : "";
+            }
+
+            if (!game) {
+              core.info("No parseable game value found in issue body.");
+              return;
+            }
+
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue_number = context.issue.number;
+            const issue = context.payload.issue;
+
+            const managedLabels = ["Counter-Strike 2"];
+            const labelMap = {
+              "Counter-Strike 2": "Counter-Strike 2",
+            };
+            const labelColors = {
+              "Counter-Strike 2": "fbca04",
+            };
+
+            const targetLabel = labelMap[game];
+
+            const currentLabels = (issue.labels || []).map((label) =>
+              typeof label === "string" ? label : label.name
+            );
+            const preservedLabels = currentLabels.filter(
+              (label) => label && !managedLabels.includes(label)
+            );
+            const nextLabels = targetLabel
+              ? [...new Set([...preservedLabels, targetLabel])]
+              : preservedLabels;
+
+            if (targetLabel) {
+              try {
+                await github.rest.issues.getLabel({
+                  owner,
+                  repo,
+                  name: targetLabel,
+                });
+              } catch (error) {
+                if (error.status === 404) {
+                  core.info(`Label '${targetLabel}' does not exist. Creating it.`);
+                  await github.rest.issues.createLabel({
+                    owner,
+                    repo,
+                    name: targetLabel,
+                    color: labelColors[targetLabel] || "ededed",
+                    description: `Auto-managed label for ${game}`,
+                  });
+                } else {
+                  throw error;
+                }
+              }
+            }
+
+            await github.rest.issues.setLabels({
+              owner,
+              repo,
+              issue_number,
+              labels: nextLabels,
+            });
+
+            core.info(
+              targetLabel
+                ? `Applied game label: ${targetLabel}`
+                : `No managed game label configured for: ${game}`
+            );
