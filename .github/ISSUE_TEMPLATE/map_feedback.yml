@@ -46,6 +46,12 @@ body:
       description: If you have a suggestion, describe the change or recommendation you would like to see.
       placeholder: "Example: Increase visibility in this corridor with brighter lighting or cleaner contrast."
 
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Screenshots or video
+      description: Optional, but helpful if you have visual evidence.
+
   - type: checkboxes
     id: checks
     attributes:
@@ -53,3 +59,5 @@ body:
       options:
         - label: I searched existing issues, including closed ones.
           required: true
+        - label: I can reproduce this issue consistently.
+          required: false
