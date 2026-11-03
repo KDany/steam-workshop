@@ -1,8 +1,13 @@
 name: Bug Report
-description: Report a reproducible bug in a KDany Steam Workshop map.
+description: Report something that is clearly broken in one of my Steam Workshop maps.
 labels:
   - Bug
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please write in **English** and [search existing issues](https://github.com/KDany/steam-workshop/issues?q=is%3Aissue) (including closed ones) first.
+
   - type: dropdown
     id: game
     attributes:
@@ -14,12 +19,34 @@ body:
     validations:
       required: true
 
-  - type: input
+  - type: dropdown
     id: map_name
     attributes:
       label: Map name
-      description: Workshop map name.
-      placeholder: "Example: Dust II Long"
+      description: Which map is affected? If it is not listed, choose "Other" and write the map name in the bug description.
+      options:
+        - Dust II Long
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: map_version
+    attributes:
+      label: Map version
+      description: The "Updated" date shown on the Workshop page, if you know it.
+      placeholder: "Example: 3 Nov 2026"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Where did it happen?
+      options:
+        - Offline / local server (with or without bots)
+        - Community server
+        - Other
     validations:
       required: true
 
@@ -36,10 +63,10 @@ body:
     id: steps
     attributes:
       label: Steps to reproduce
-      description: List exact steps so the issue can be reproduced.
+      description: List the exact steps so the issue can be reproduced.
       placeholder: "Example:\n1. Load the map\n2. Start a round\n3. Check the radar/minimap"
     validations:
-      required: false
+      required: true
 
   - type: textarea
     id: expected_vs_actual
@@ -47,6 +74,37 @@ body:
       label: Expected vs actual behavior
       description: Describe what you expected, then what happened instead.
       placeholder: "Example:\nExpected: The minimap should show the map layout and update player position.\nActual: The minimap frame is visible, but the map layout is empty."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: How often does it happen?
+      options:
+        - Always
+        - Sometimes
+        - It happened once
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: Location (getpos)
+      description: |
+        Stand at the problematic spot, open the developer console and type `getpos`, then paste the output here. This helps me find the exact spot in the editor.
+      placeholder: "Example: setpos 123.45 -678.90 64.03;setang 2.50 90.00 0.00"
+      render: text
+    validations:
+      required: false
+
+  - type: textarea
+    id: system
+    attributes:
+      label: System specs
+      description: Only needed for performance issues (FPS drops, stutter, hitching).
+      placeholder: "Example:\nCPU: Ryzen 5 5600\nGPU: RTX 3060\nResolution & settings: 1920x1080, High"
     validations:
       required: false
 
@@ -62,6 +120,4 @@ body:
       label: Checklist
       options:
         - label: I searched existing issues, including closed ones.
-          required: true
-        - label: I can reproduce this issue consistently.
           required: true
