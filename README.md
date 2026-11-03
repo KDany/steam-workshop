@@ -1,3 +1,10 @@
+[![Open issues](https://img.shields.io/github/issues/KDany/steam-workshop?logo=github)](https://github.com/KDany/steam-workshop/issues)
+[![Open bugs](https://img.shields.io/github/issues/KDany/steam-workshop/Bug?label=open%20bugs&color=d73a4a)](https://github.com/KDany/steam-workshop/issues?q=is%3Aissue%20is%3Aopen%20label%3ABug)
+[![Fixed in next update](https://img.shields.io/github/issues/KDany/steam-workshop/fixed-in-next-update?label=fixed%20in%20next%20update&color=0e8a16)](https://github.com/KDany/steam-workshop/issues?q=is%3Aissue%20label%3Afixed-in-next-update)
+[![Discussions](https://img.shields.io/github/discussions/KDany/steam-workshop?logo=github)](https://github.com/KDany/steam-workshop/discussions)
+[![Reports: English only](https://img.shields.io/badge/Reports-English%20only-blue)](#language)
+[![Game: Counter-Strike 2](https://img.shields.io/badge/Game-Counter--Strike%202-orange?logo=counterstrike&logoColor=white)](https://www.counter-strike.net/)
+
 KDany's Steam Workshop Issue Tracker
 =================================
 
@@ -10,9 +17,9 @@ Please note that this repository is dedicated to bug reports and technical feedb
 Maps
 ----
 
-| Map | Game | Workshop | Source files |
-| :--- | :--- | :--- | :--- |
-| Dust II Long | Counter-Strike 2 | [Workshop page](https://steamcommunity.com/profiles/76561198011807358/myworkshopfiles/) | - |
+| Map | Game | Workshop | Subscriptions | Last updated | Source files |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Dust II Long | Counter-Strike 2 | [Workshop page](https://steamcommunity.com/sharedfiles/filedetails/?id=3730804227) | [![Subscriptions](https://img.shields.io/steam/subscriptions/3730804227?logo=steam&label=)](https://steamcommunity.com/sharedfiles/filedetails/?id=3730804227) | [![Last updated](https://img.shields.io/steam/update-date/3730804227?logo=steam&label=)](https://steamcommunity.com/sharedfiles/filedetails/?id=3730804227) | - |
 
 All of my Workshop items: [KDany's Workshop](https://steamcommunity.com/profiles/76561198011807358/myworkshopfiles/)
 
