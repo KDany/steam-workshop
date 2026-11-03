@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Sync labels from .github/labels.yml
-        uses: crazy-max/ghaction-github-labeler@v5
+        uses: crazy-max/ghaction-github-labeler@v6
         with:
           yaml-file: .github/labels.yml
           # Keep labels that are not listed (e.g. GitHub defaults) instead of deleting them
