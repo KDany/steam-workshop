@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Discussions / General questions
-    url: https://github.com/kdany/steam-workshop/discussions
+    url: https://github.com/KDany/steam-workshop/discussions
     about: Please use Discussions for non-bug topics or general questions.
+  - name: Map source files (CS2)
+    url: https://github.com/KDany/cs2-maps
+    about: Raw Hammer source files of my CS2 maps, permission requests and community variant listings.

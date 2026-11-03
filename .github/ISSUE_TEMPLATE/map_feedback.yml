@@ -1,23 +1,32 @@
 name: Map Technical Feedback
-description: Report map-specific technical feedback that is not a clear bug.
+description: Share feedback about something that works, but feels off, unclear or unbalanced.
 labels:
   - Feedback
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your feedback! Please write in **English** and [search existing issues](https://github.com/KDany/steam-workshop/issues?q=is%3Aissue) (including closed ones) first.
+
   - type: dropdown
     id: game
     attributes:
       label: Game
+      description: Which game does this feedback relate to?
       options:
         - Counter-Strike 2
       default: 0
     validations:
       required: true
 
-  - type: input
+  - type: dropdown
     id: map_name
     attributes:
-      label: Workshop map name.
-      placeholder: "Example: Dust II Long"
+      label: Map name
+      description: Which map is this about? If it is not listed, choose "Other" and write the map name in the feedback.
+      options:
+        - Dust II Long
+        - Other
     validations:
       required: true
 
@@ -31,10 +40,21 @@ body:
       required: true
 
   - type: textarea
+    id: location
+    attributes:
+      label: Location (getpos)
+      description: |
+        Optional: stand at the spot, open the developer console and type `getpos`, then paste the output here.
+      placeholder: "Example: setpos 123.45 -678.90 64.03;setang 2.50 90.00 0.00"
+      render: text
+    validations:
+      required: false
+
+  - type: textarea
     id: details
     attributes:
       label: Technical feedback
-      description: "Describe the problem and why it impacts gameplay."
+      description: Describe the problem and why it impacts gameplay.
       placeholder: "Example: The lighting contrast in this map location makes enemies hard to spot at longer distances, which creates unbalanced gameplay."
     validations:
       required: true
@@ -59,5 +79,3 @@ body:
       options:
         - label: I searched existing issues, including closed ones.
           required: true
-        - label: I can reproduce this issue consistently.
-          required: false

@@ -1,25 +1,43 @@
-labels:
-  - name: Bug
-    color: d73a4a
-    description: Confirmed bug report.
-  - name: Feedback
-    color: 0e8a16
-    description: Technical map feedback and suggestions.
-  - name: Counter-Strike 2
-    color: fbca04
-    description: Counter-Strike 2 related report.
-  - name: needs-info
-    color: fbca04
-    description: More information is required before this can be triaged.
-  - name: duplicate
-    color: cfd3d7
-    description: Report already exists in another issue.
-  - name: visual
-    color: bfd4f2
-    description: Visual, lighting, readability, or asset presentation issue.
-  - name: gameplay
-    color: 7057ff
-    description: Layout, balance, sightline, spawn, or gameplay flow issue.
-  - name: performance
-    color: f9d0c4
-    description: FPS, stutter, hitching, or general performance issue.
+# Synced to the repository by .github/workflows/label-sync.yml
+# Format: https://github.com/crazy-max/ghaction-github-labeler
+
+# Issue type (set by the issue templates)
+- name: Bug
+  color: d73a4a
+  description: Bug report (not yet confirmed).
+- name: Feedback
+  color: 0e8a16
+  description: Technical map feedback and suggestions.
+
+# Game (set automatically by the issue triage workflow)
+- name: Counter-Strike 2
+  color: fbca04
+  description: Counter-Strike 2 related report.
+
+# Category
+- name: visual
+  color: bfd4f2
+  description: Visual, lighting, readability, or asset presentation issue.
+- name: gameplay
+  color: 7057ff
+  description: Layout, balance, sightline, spawn, or gameplay flow issue.
+- name: performance
+  color: f9d0c4
+  description: FPS, stutter, hitching, or general performance issue.
+
+# Status
+- name: needs-info
+  color: d876e3
+  description: More information is required before this can be triaged.
+- name: confirmed
+  color: b60205
+  description: Reproduced and confirmed by the map author.
+- name: fixed-in-next-update
+  color: 0e8a16
+  description: Fixed, will be included in the next Workshop update.
+- name: duplicate
+  color: cfd3d7
+  description: Report already exists in another issue.
+- name: wontfix
+  color: ffffff
+  description: Will not be changed (intended behavior or out of scope).

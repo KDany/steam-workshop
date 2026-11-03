@@ -1,0 +1,127 @@
+name: Issue triage
+
+on:
+  issues:
+    types:
+      - opened
+      - edited
+      - reopened
+
+permissions:
+  issues: write
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply game label and normalize title
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const body = (issue.body || "").replace(/\r/g, "");
+            const { owner, repo } = context.repo;
+            const issue_number = issue.number;
+
+            // Parse issue form output: "### Field label" followed by the value.
+            function parseIssueFormFields(markdown) {
+              const fields = new Map();
+              let currentField = null;
+              let buffer = [];
+
+              const flush = () => {
+                if (!currentField) return;
+                const value = buffer
+                  .map((line) => line.trim())
+                  .filter((line) => line.length > 0 && line !== "_No response_")
+                  .join("\n")
+                  .trim();
+                fields.set(currentField.toLowerCase(), value);
+              };
+
+              for (const line of markdown.split("\n")) {
+                const heading = line.match(/^###\s+(.+?)\s*$/);
+                if (heading) {
+                  flush();
+                  currentField = heading[1];
+                  buffer = [];
+                } else if (currentField) {
+                  buffer.push(line);
+                }
+              }
+
+              flush();
+              return fields;
+            }
+
+            const fields = parseIssueFormFields(body);
+
+            // ---- 1. Game label -------------------------------------------------
+            // Add new games here: form value -> label name / color.
+            const gameLabels = {
+              "Counter-Strike 2": { name: "Counter-Strike 2", color: "fbca04" },
+            };
+            const managedLabels = Object.values(gameLabels).map((l) => l.name);
+
+            const game = (fields.get("game") || "").split("\n")[0].trim();
+            const target = gameLabels[game];
+
+            if (!game) {
+              core.info("No game value found in issue body.");
+            } else if (!target) {
+              core.info(`No managed game label configured for: ${game}`);
+            } else {
+              try {
+                await github.rest.issues.getLabel({ owner, repo, name: target.name });
+              } catch (error) {
+                if (error.status !== 404) throw error;
+                core.info(`Label '${target.name}' does not exist. Creating it.`);
+                await github.rest.issues.createLabel({
+                  owner,
+                  repo,
+                  name: target.name,
+                  color: target.color,
+                  description: `${target.name} related report.`,
+                });
+              }
+
+              const currentLabels = (issue.labels || []).map((l) =>
+                typeof l === "string" ? l : l.name
+              );
+              const nextLabels = [
+                ...new Set([
+                  ...currentLabels.filter((l) => l && !managedLabels.includes(l)),
+                  target.name,
+                ]),
+              ];
+
+              await github.rest.issues.setLabels({ owner, repo, issue_number, labels: nextLabels });
+              core.info(`Applied game label: ${target.name}`);
+            }
+
+            // ---- 2. Title normalization: "[Map name]: title" --------------------
+            const mapName = (fields.get("map name") || "").split("\n")[0].trim();
+
+            if (!mapName || mapName.toLowerCase() === "other") {
+              core.info("No specific map selected, title left unchanged.");
+              return;
+            }
+
+            const currentTitle = (issue.title || "").trim();
+            // Idempotent: strip the same map prefix if it is already there.
+            const escaped = mapName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+            const userTitle = currentTitle.replace(new RegExp(`^\\[${escaped}\\]:\\s*`, "i"), "").trim();
+
+            if (!userTitle) {
+              core.info("No user title remains after normalization.");
+              return;
+            }
+
+            const normalizedTitle = `[${mapName}]: ${userTitle}`;
+            if (normalizedTitle === currentTitle) {
+              core.info("Issue title is already normalized.");
+              return;
+            }
+
+            await github.rest.issues.update({ owner, repo, issue_number, title: normalizedTitle });
+            core.info(`Updated title to: ${normalizedTitle}`);
