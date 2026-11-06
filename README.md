@@ -5,6 +5,8 @@
 [![Reports: English only](https://img.shields.io/badge/Reports-English%20only-blue?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyBmaWxsPSJ3aGl0ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiI%2BPHBhdGggZD0iTTggMGE4IDggMCAxIDEgMCAxNkE4IDggMCAwIDEgOCAwWk01Ljc4IDguNzVhOS42NCA5LjY0IDAgMCAwIDEuMzYzIDQuMTc3Yy4yNTUuNDI2LjU0Mi44MzIuODU3IDEuMjE1LjI0NS0uMjk2LjU1MS0uNzA1Ljg1Ny0xLjIxNUE5LjY0IDkuNjQgMCAwIDAgMTAuMjIgOC43NVptNC40NC0xLjVhOS42NCA5LjY0IDAgMCAwLTEuMzYzLTQuMTc3Yy0uMzA3LS41MS0uNjEyLS45MTktLjg1Ny0xLjIxNWE5LjkyNyA5LjkyNyAwIDAgMC0uODU3IDEuMjE1QTkuNjQgOS42NCAwIDAgMCA1Ljc4IDcuMjVabS01Ljk0NCAxLjVIMS41NDNhNi41MDcgNi41MDcgMCAwIDAgNC42NjYgNS41Yy0uMTIzLS4xODEtLjI0LS4zNjUtLjM1Mi0uNTUyLS43MTUtMS4xOTItMS40MzctMi44NzQtMS41ODEtNC45NDhabS0yLjczMy0xLjVoMi43MzNjLjE0NC0yLjA3NC44NjYtMy43NTYgMS41OC00Ljk0OC4xMi0uMTk3LjIzNy0uMzgxLjM1My0uNTUyYTYuNTA3IDYuNTA3IDAgMCAwLTQuNjY2IDUuNVptMTAuMTgxIDEuNWMtLjE0NCAyLjA3NC0uODY2IDMuNzU2LTEuNTggNC45NDgtLjEyLjE5Ny0uMjM3LjM4MS0uMzUzLjU1MmE2LjUwNyA2LjUwNyAwIDAgMCA0LjY2Ni01LjVabTIuNzMzLTEuNWE2LjUwNyA2LjUwNyAwIDAgMC00LjY2Ni01LjVjLjEyMy4xODEuMjQuMzY1LjM1My41NTIuNzE0IDEuMTkyIDEuNDM2IDIuODc0IDEuNTggNC45NDhaIi8%2BPC9zdmc%2B)](#language)
 [![Game: Counter-Strike 2](https://img.shields.io/badge/Game-Counter--Strike%202-orange?logo=counterstrike&logoColor=white)](https://www.counter-strike.net/)
 
+![KDany · Issue Tracker – Bug reports & feedback for my Steam Workshop maps](./docs/images/banner.png)
+
 KDany's Steam Workshop Issue Tracker
 =================================
 
